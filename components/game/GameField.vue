@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <div :style="{height: this.fieldSize+'px', width: this.fieldSize+'px'}" class="game__field">
+    <div :style="{height: size+'px', width: size+'px'}" class="game__field">
       <div
         v-for="(puzle, index) in puzleItems"
         :key="`row-${index}`"
@@ -20,6 +20,9 @@ import Vue from 'vue'
 import Puzle from '@/models/puzle'
 
 export default Vue.extend({
+  props: {
+    size: Number
+  },
   data: () => ({
     fieldModel: {},
     puzleItems: [],
@@ -46,7 +49,7 @@ export default Vue.extend({
       }
     },
     hasMove (puzle, target) {
-      if ((Math.abs((puzle.row + puzle.col) - (target.row + target.col)) === 1) && Math.abs(puzle.row - target.row) <= 1 && Math.abs(puzle.col - target.col) <= 1) {
+      if ((Math.abs((puzle.row + puzle.col) - (target.row + target.col)) === 1) && Math.abs(puzle.row - target.row) <= 1 && Math.abs(puzle.col - target.col) <= 1 && this.isVictory) {
         return true
       }
       return false
@@ -59,14 +62,18 @@ export default Vue.extend({
     },
     updateField () {
       let i = 0
-      this.fieldModel.gameField.forEach((item) => {
+      let temp;
+      this.fieldModel.gameField.forEach((item, row) => {
         item.forEach(
-          (el) => {
-            this.puzleItems.push(new Puzle({
-              fieldSize: this.fieldSize,
+          (el, col) => {
+            temp = new Puzle({
+              fieldSize: this.size,
               puzlePosition: i++,
               puzleNumber: el
-            }))
+            })
+            temp.setCol(col);
+            temp.setRow(row);
+            this.puzleItems.push(temp)
           }
         )
       })

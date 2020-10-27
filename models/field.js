@@ -38,14 +38,9 @@ export default class Field {
   }
 
   swapIndex (target, item) {
-    // хз почему не работает [a, b] = [b, a]
-    console.log(this.gameField, 1)
-
     const a = this.gameField[target.row][target.col]
     const b = this.gameField[item.row][item.col]
     this.gameField[item.row][item.col] = a
     this.gameField[target.row][target.col] = b
-
-    console.log(this.gameField, 2)
   }
 }

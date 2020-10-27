@@ -8,25 +8,22 @@ export default class Puzle {
     this.fieldSize = fieldSize
     this.puzlePosition = puzlePosition
     this.puzleNumber = puzleNumber
-    this.row = Math.floor(this.puzlePosition / 4)
-    this.col = this.getColumnStart()
   }
 
   getRow () {
     return this.row
   }
 
-  getColumn () {
-    return this.col
+  setRow (row) {
+    this.row = row
   }
 
-  getColumnStart () {
-    let temp = this.puzlePosition
-    const i = 0
-    while (temp >= 4) {
-      temp -= 4
-    }
-    return Math.floor(temp)
+  setCol (col) {
+    this.col = col
+  }
+
+  getColumn () {
+    return this.col
   }
 
   getWidth () {

@@ -1,9 +1,9 @@
 <template>
   <div class="wrap">
-    <GameField @onStepIncrement="fifteen.steps++" @onVictory="onVictory" />
+    <GameField @onStepIncrement="fifteen.steps++" @onVictory="onVictory" :size="400" />
     <div class="info_panel">
-      <span class="steps">{{ fifteen.steps }}</span>
-      <span v-if="fifteen.victory" class="victory">Ура, победа</span>
+      <div class="steps">{{ fifteen.steps }}</div>
+      <div v-if="fifteen.victory" class="victory">Ура, победа!!!</div>
     </div>
   </div>
 </template>
@@ -24,7 +24,6 @@ export default Vue.extend({
   }),
   methods: {
     onVictory (data) {
-      console.log(data)
       this.fifteen.victory = data
     }
   }
@@ -39,11 +38,18 @@ export default Vue.extend({
 .wrap {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
 
   .info_panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     font-size: 20px;
-    margin-left: 30px;
     padding: 20px;
+    width: 100%;
+    margin: 0 auto;
   }
 }
 </style>
